@@ -7,6 +7,7 @@ on:
     branches: ["main"]
 
 jobs:
+# job that tests the code on multiple versions of Node.js  
   build_test:
     strategy:
       matrix:
@@ -27,3 +28,14 @@ jobs:
 
       - name: Run integration tests
         run: npm test
+#new job for deploying to render using the stored in GitHub secrets for the service ID and API key
+  deploy:
+      needs: build_test
+      runs-on: ubuntu-latest
+      if: github.ref == 'refs/heads/main'
+      steps:
+        - name: Deploy to production
+          uses: johnbeynon/render-deploy-action@v0.0.8
+          with:
+            service-id: ${{ secrets.SERVICE_ID }}
+            api-key: ${{ secrets.RENDER_TOKEN }}
