@@ -26,6 +26,7 @@ jobs:
         run: npm audit
 
   build_test:
+    needs: build_security_test
     runs-on: ubuntu-latest
 
     steps:
