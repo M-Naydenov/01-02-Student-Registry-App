@@ -5,6 +5,7 @@ services:
     ports:
       - "8080:8080" # Map port 8081 on the host to port 8081 
       # in the container since this is the port of JENKINS
+      # test after stopping ngrok
 
     environment:
       - NODE_ENV=production
